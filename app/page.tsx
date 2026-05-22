@@ -64,9 +64,39 @@ export default function Home() {
     checkAuth();
   }, []);
 
-  const fetchNotes = async () => {
-    const res = await fetch("https://app-note-backend-6o3h.onrender.com/api/notes");
-    const data = await res.json();
+  const fetchNotes =
+  async () => {
+    const token =
+      localStorage.getItem(
+        "token"
+      );
+
+    console.log(
+      token
+    );
+
+    const res =
+      await fetch(
+        "https://app-note-backend-6o3h.onrender.com/api/notes",
+        {
+          headers: {
+            Authorization:
+              `Bearer ${token}`,
+          },
+        }
+      );
+
+    console.log(
+      res.status
+    );
+
+    const data =
+      await res.json();
+
+    console.log(
+      data
+    );
+
     setNotes(data);
   };
 

@@ -24,7 +24,6 @@ export default function LoginPage() {
                 body: JSON.stringify({ name, password })
             })
             const data = await res.json();
-            console.log(data)
             localStorage.setItem("token",data.token);
             setLoading(false);
         } catch (err) {
