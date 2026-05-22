@@ -48,6 +48,7 @@ export default function Home() {
     setMode("POST");
     setTitle("");
     setSelectedId("");
+    setLoadAddBtn(false)
     fetchNotes();
   }
 
