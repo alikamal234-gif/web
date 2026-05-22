@@ -53,7 +53,7 @@ export default function Home() {
   const addNote = async () => {
     if (!title.trim()) return;
 
-    await fetch("https://app-note-backend-6o3h.onrender.com/api/notes", {
+    await fetch("https://app-note-backend-6o3h.onrender.com/api/note/api/notes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -87,7 +87,7 @@ export default function Home() {
 
           <button
             onClick={() => {
-              if (mode == "POST") addNote
+              if (mode == "POST") addNote()
               if (mode == "PUT") updateNote(selectedId)
             }}
             className="rounded bg-black px-4 py-2 text-white"
