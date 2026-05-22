@@ -11,6 +11,7 @@ export default function Home() {
   const [notes, setNotes] = useState<Note[]>([]);
   const [title, setTitle] = useState("");
   const [load, setLoad] = useState(false);
+  const [loadAddBtn, setLoadAddBtn] = useState(false)
   const [mode, setMode] = useState("POST");
   const [selectedId, setSelectedId] = useState("");
 
@@ -60,7 +61,7 @@ export default function Home() {
       },
       body: JSON.stringify({ title }),
     });
-
+    setLoadAddBtn(false)
     setTitle("");
     fetchNotes();
   };
@@ -98,12 +99,39 @@ export default function Home() {
 
               <button
                 onClick={() => {
-                  if (mode == "POST") addNote();
-                  if (mode == "PUT") updateNote(selectedId);
+                  setLoadAddBtn(true);
+
+                  if (mode === "POST")
+                    addNote();
+
+                  if (mode === "PUT")
+                    updateNote(selectedId);
                 }}
                 className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-medium shadow-lg hover:shadow-blue-500/25 transition-all duration-200 transform hover:scale-105"
               >
-                {mode == "POST" ? " Ajouter" : mode == "PUT" ? " Modifier" : ""}
+                {loadAddBtn ? (
+                  <svg
+                    aria-hidden="true"
+                    className="w-5 h-5 animate-spin text-white"
+                    viewBox="0 0 100 101"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908Z"
+                      fill="currentColor"
+                      className="opacity-20"
+                    />
+                    <path
+                      d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124"
+                      fill="currentColor"
+                    />
+                  </svg>
+                ) : mode === "POST" ? (
+                  "Ajouter"
+                ) : (
+                  "Modifier"
+                )}
               </button>
             </div>
           </div>
@@ -128,7 +156,7 @@ export default function Home() {
                           {note.title}
                         </p>
                       </div>
-                      
+
                       <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                         <button
                           className="p-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 transition-all duration-200"
@@ -197,7 +225,7 @@ export default function Home() {
                         </button>
                       </div>
                     </div>
-                    
+
                     {/* Indicateur de mode édition */}
                     {mode === "PUT" && selectedId === note._id && (
                       <div className="absolute top-2 right-2">
