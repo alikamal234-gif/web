@@ -88,7 +88,7 @@ export default function Home() {
               <div className="flex-1 relative">
                 <input
                   type="text"
-                  placeholder={mode == "POST" ? " Écrivez votre note..." : mode == "PUT" ? "📝 Modifiez votre note..." : ""}
+                  placeholder={mode == "POST" ? " Écrivez votre note..." : mode == "PUT" ? " Modifiez votre note..." : ""}
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   className="w-full rounded-xl bg-gray-900 border border-gray-600 px-5 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-200"
