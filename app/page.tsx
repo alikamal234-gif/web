@@ -53,7 +53,7 @@ export default function Home() {
   const addNote = async () => {
     if (!title.trim()) return;
 
-    await fetch("https://app-note-backend-6o3h.onrender.com/api/note/api/notes", {
+    await fetch("https://app-note-backend-6o3h.onrender.com/api/notes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
