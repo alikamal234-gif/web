@@ -26,6 +26,9 @@ export default function LoginPage() {
                 body: JSON.stringify({ name, password })
             })
             if (res.ok) {
+                const data = await res.json();
+                document.cookie = `token=${data.token}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Lax`;
+                localStorage.setItem("token", data.token);
                 console.log("ok")
                 router.push("/");
             }
