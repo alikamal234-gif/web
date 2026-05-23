@@ -17,7 +17,24 @@ export default function Home() {
   const [mode, setMode] = useState("POST");
   const [selectedId, setSelectedId] = useState("");
 
+  const router =
+useRouter();
 
+useEffect(() => {
+  const token =
+    localStorage.getItem(
+      "token"
+    );
+
+  if (!token) {
+    router.push(
+      "/login"
+    );
+    return;
+  }
+
+  fetchNotes();
+}, []);
   const fetchNotes =
   async () => {
     

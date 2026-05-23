@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -32,14 +32,20 @@ export default function RegisterPage() {
     setLoading(true);
 
     try{
+      console.log('jjj')
         const res = await fetch('https://app-note-backend-6o3h.onrender.com/api/auth/register',{
             method : "POST",
             headers : {
-                "Content-Type" : "Application/json"
+                "Content-Type" : "application/json"
             },
             body : JSON.stringify(formData)
         })
+      console.log('jjjc')
+
         const data = await res.json()
+        if(data){
+          router.push("/login");
+        }
         console.log(data)
         setLoading(false)
     }catch(err){

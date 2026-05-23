@@ -19,15 +19,19 @@ export default function LoginPage() {
             const res = await fetch('https://app-note-backend-6o3h.onrender.com/api/auth/login', {
                 method: "POST",
                 headers: {
-                    "Content-Type": "Application/json"
+                    "Content-Type": "application/json"
                 },
+                credentials:
+  "include",
                 body: JSON.stringify({ name, password })
             })
-            const data = await res.json();
-            localStorage.setItem("token",data.token);
+            if (res.ok) {
+                console.log("ok")
+                router.push("/");
+            }
             setLoading(false);
         } catch (err) {
-            console.log(err)
+            console.log(err)        
             setLoading(false)
         }
     };
